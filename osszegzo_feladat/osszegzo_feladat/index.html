@@ -85,7 +85,10 @@
         >
 
             <h3>
-                {{ termek.name }} - {{ termek.ar }} Ft
+                {{ termek.name }} -
+                <span :style="{ color: termek.keszlet === 0 ? elfogyottSzin : (termek.keszlet <= 3 ? utolsoDarabSzin : raktaronSzin) }">
+                    {{ termek.ar }} Ft
+                </span>
             </h3>
 
             <p
