@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Init vue app</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="appdiv">
+        <h1>Guitars:</h1>
+        <div id="guitars">
+        <div v-for="guitar in guitars" :key="guitar.id">
+            <h2>{{guitar.name}} </h2>
+            <span v-if="guitar.stock === 0"  :style="{color: outOfStockStyle}">Out of stock</span>
+            <span v-else-if="guitar.stock < 3" :style="{color: onlyFewLeftColor}">Nincs sok</span>
+            <span v-else :style="{color: inStockColor}">In stock</span>
+        </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+</html>

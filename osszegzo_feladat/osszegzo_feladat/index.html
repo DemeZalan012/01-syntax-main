@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelBolt — összefoglaló feladat</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <header :title="tooltip">
+            <h1>{{ shopName }}</h1>
+            <p>{{ slogan }}</p>
+        </header>
+
+        <hr>
+
+        <h2>Üdvözlő</h2>
+
+        <p v-html="welcomeHtml"></p>
+
+        <hr>
+
+        <h2>Logó</h2>
+
+        <img v-bind="logo">
+
+        <hr>
+
+        <h2>Kiemelt termékek</h2>
+
+        <ul>
+            <li
+                v-for="(termek, index) in kiemeltek"
+                :key="termek.id"
+            >
+                {{ index + 1 }}. {{ termek.name }}
+            </li>
+        </ul>
+
+        <hr>
+
+        <h2>Polcok</h2>
+
+        <div
+            v-for="(polc, index) in polcok"
+            :key="index"
+        >
+            <h3>{{ index + 1 }}. polc</h3>
+
+            <ul>
+                <li
+                    v-for="(termek, termekIndex) in polc"
+                    :key="termekIndex"
+                >
+                    {{ termek }}
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2>Most kapható</h2>
+
+        <ul>
+            <template
+                v-for="termek in termekek"
+                :key="termek.id"
+            >
+                <li v-if="termek.keszlet > 0">
+                    {{ termek.name }}
+                </li>
+            </template>
+        </ul>
+
+        <hr>
+
+        <h2>Teljes kínálat</h2>
+
+        <div
+            v-for="termek in termekek"
+            :key="termek.id"
+        >
+
+            <h3>
+                {{ termek.name }} - {{ termek.ar }} Ft
+            </h3>
+
+            <p
+                v-if="termek.keszlet === 0"
+                :style="{ color: elfogyottSzin }"
+            >
+                Elfogyott
+            </p>
+
+            <p
+                v-else-if="termek.keszlet <= 3"
+                :style="{ color: utolsoDarabSzin }"
+            >
+                Utolsó darabok, csak {{ termek.keszlet }} db
+            </p>
+
+            <p
+                v-else
+                :style="{ color: raktaronSzin }"
+            >
+                Raktáron
+            </p>
+
+            <strong v-show="termek.akcios">
+                Akció!
+            </strong>
+
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>
